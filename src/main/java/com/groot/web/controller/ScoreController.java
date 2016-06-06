@@ -55,14 +55,14 @@ public class ScoreController {
      * @return
      */
     @RequestMapping(value = "/index", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView score(HttpServletResponse response,ModelMap map) {
-        String loginUserName= CustomDetailsService.getUserName();
-        if(loginUserName!=null){
-            SystemUserDTO systemUserDTO=systemUserService.findByUserName(loginUserName);
+    public ModelAndView score(HttpServletResponse response, ModelMap map) {
+        String loginUserName = CustomDetailsService.getUserName();
+        if (loginUserName != null) {
+            SystemUserDTO systemUserDTO = systemUserService.findByUserName(loginUserName);
             String userData = JSONUtils.getJsonString(systemUserDTO);
             map.put("userData", userData);
         }
-        return new ModelAndView("index",map);
+        return new ModelAndView("index", map);
     }
 
     @RequestMapping("/seo")
@@ -83,6 +83,7 @@ public class ScoreController {
     public ModelAndView score(HttpServletRequest request, ModelMap model,
                               @RequestParam(value = "url", required = false) String url,
                               @RequestParam(value = "returnNum", required = false, defaultValue = "1") int returnNum) {
+
 
         if (url != null) {
             url = url.replaceAll("http://", "").replace(" ", "").toLowerCase();
@@ -111,11 +112,11 @@ public class ScoreController {
             } else {
                 jsonData = jedis.get(url + "-seo");
             }
-            String loginUserName= CustomDetailsService.getUserName();
-            if(loginUserName!=null){
-                SystemUserDTO systemUserDTO=systemUserService.findByUserName(loginUserName);
+            String loginUserName = CustomDetailsService.getUserName();
+            if (loginUserName != null) {
+                SystemUserDTO systemUserDTO = systemUserService.findByUserName(loginUserName);
                 String userData = JSONUtils.getJsonString(systemUserDTO);
-                model.put("userData",userData);
+                model.put("userData", userData);
             }
 
             model.put("model", jsonData);
@@ -143,12 +144,12 @@ public class ScoreController {
     @RequestMapping(value = "/domain", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView domain(HttpServletRequest request, ModelMap model,
                                @RequestParam(value = "url", required = false) String url,
-                               @RequestParam(value = "returnNum", required = false,defaultValue = "1") String search) {
+                               @RequestParam(value = "returnNum", required = false, defaultValue = "1") String search) {
         String jsonData;
-        String loginUserName= CustomDetailsService.getUserName();
+        /*String loginUserName= CustomDetailsService.getUserName();
         SystemUserDTO systemUserDTO=systemUserService.findByUserName(loginUserName);
         String userData = JSONUtils.getJsonString(systemUserDTO);
-        model.put("userData",userData);
+        model.put("userData",userData);*/
         if (url != null && !url.equals("")) {
 
             url = url.replaceAll("http://", "").replace(" ", "").toLowerCase();
@@ -166,8 +167,8 @@ public class ScoreController {
                     ScoreItem scoreItems = domainScoreItemsService.scoreExtLinksFrequency(url);
                     jsonData = jedis.get(url + "-seo-det");
                     List<ScoreItem> list = JSON.parseArray(jsonData, ScoreItem.class);
-                    list.forEach(e->{
-                        if(e.getCode().equals("SEO3_5")){
+                    list.forEach(e -> {
+                        if (e.getCode().equals("SEO3_5")) {
                             e.setScore(scoreItems.getScore());
                             e.setProblem(scoreItems.getProblem());
                             e.setDesc(scoreItems.getDesc());
@@ -177,7 +178,7 @@ public class ScoreController {
                 }
 
                 model.put("reutrnUrl", url);
-                model.put("search",search);
+                model.put("search", search);
                 model.put("rows", jsonData);
 
                 if (jedis != null) {
@@ -185,11 +186,11 @@ public class ScoreController {
                 }
                 return new ModelAndView("pingjia", model);
             } else {
-                model.put("search",search);
+                model.put("search", search);
                 return new ModelAndView("index", model);
             }
         } else {
-            model.put("search",search);
+            model.put("search", search);
             model.put("reutrnUrl", url);
             return new ModelAndView("index", model);
         }
@@ -209,10 +210,10 @@ public class ScoreController {
                                @RequestParam(value = "userName", required = false) String userName) {
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        List<ReportInfoDTO> perfect = baseReportInfoService.queryInfo(userName,endPer,startPer);
+        List<ReportInfoDTO> perfect = baseReportInfoService.queryInfo(userName, endPer, startPer);
         long count = baseReportInfoService.getQueryInfoCount(userName);
         Map<String, Object> jsonMapData = JSONUtils.getJsonMapData(perfect);
-        jsonMapData.put("countData",count);
+        jsonMapData.put("countData", count);
         jsonView.setAttributesMap(jsonMapData);
 
         return new ModelAndView(jsonView);
@@ -226,8 +227,8 @@ public class ScoreController {
      */
     @RequestMapping(value = "/downSeoReport", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_VALUE)
     public void down(HttpServletRequest request, HttpServletResponse response,
-                               @RequestParam(value = "uid", required = false) String uid,
-                               @RequestParam(value = "userName", required = false) String userName) {
+                     @RequestParam(value = "uid", required = false) String uid,
+                     @RequestParam(value = "userName", required = false) String userName) {
         String filename = UUID.randomUUID().toString().replace("-", "") + ".html";
         OutputStream os = null;
 
@@ -235,7 +236,7 @@ public class ScoreController {
             response.addHeader("Content-Disposition", "attachment;filename=" + new String((filename).getBytes("UTF-8"), "ISO8859-1"));
             os = response.getOutputStream();
 
-            baseReportInfoService.downReport(os,uid,userName);
+            baseReportInfoService.downReport(os, uid, userName);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -272,14 +273,14 @@ public class ScoreController {
         boolean jedisFalg = jedis.exists("result_" + uid);
         List<Object> objects = new ArrayList<>();
         Map<String, String> stringMap1 = getProblems.readProperties("seo-problems");
-        if(jedisFalg){
+        if (jedisFalg) {
             String jsonData = jedis.get("result_" + uid);
-            baseReportInfoService.updateDate(jsonData,uid,userName);
+            baseReportInfoService.updateDate(jsonData, uid, userName);
             //json数据处理
             String _jsonData = JSONJudge.getJsonDge(jsonData);
 
-            jedis.set("seo-"+uid,_jsonData);
-            if(jedis.exists("seo-"+uid)){
+            jedis.set("seo-" + uid, _jsonData);
+            if (jedis.exists("seo-" + uid)) {
                 jedis.del("result_" + uid);
                 jedis.del("tasks_" + uid);
                 jedis.del("workers_" + uid);
@@ -292,33 +293,33 @@ public class ScoreController {
 
             stringMap.put("resultData", objects);
             stringMap.put("resultInfo", objects1);
-        }else{
+        } else {
             boolean jedisJudge = jedis.exists("seo-" + uid);
 
-            if(jedisJudge){
-                String jsonData = jedis.get("seo-"+uid);
+            if (jedisJudge) {
+                String jsonData = jedis.get("seo-" + uid);
                 objects.add(jsonData);
                 List<Object> objects1 = new ArrayList<>();
                 objects1.add(JSONUtils.getJsonString(stringMap1));
                 stringMap.put("resultData", objects);
                 stringMap.put("resultInfo", objects1);
-            }else{
+            } else {
                 ReportInfoDTO reportInfoDTO = baseReportInfoService.getReportByUid(uid, userName);
 
-                if(reportInfoDTO != null && reportInfoDTO.getUserData() != null && !reportInfoDTO.getUserData().equals("0")){
+                if (reportInfoDTO != null && reportInfoDTO.getUserData() != null && !reportInfoDTO.getUserData().equals("0")) {
 //j                 son数据处理
                     String _jsonData = JSONJudge.getJsonDge(reportInfoDTO.getUserData());
 
-                    jedis.set("seo-"+uid,_jsonData);
+                    jedis.set("seo-" + uid, _jsonData);
                     objects.add(_jsonData);
                     List<Object> objects1 = new ArrayList<>();
                     objects1.add(JSONUtils.getJsonString(stringMap1));
 
                     stringMap.put("resultData", objects);
                     stringMap.put("resultInfo", objects1);
-                }else{
+                } else {
                     Map<String, String> stringMap2 = new HashMap<>();
-                    stringMap1.put("flag","0");
+                    stringMap1.put("flag", "0");
                     jsonView.setAttributesMap(stringMap1);
                     return new ModelAndView(jsonView);
                 }

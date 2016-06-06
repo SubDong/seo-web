@@ -346,7 +346,11 @@ $(document).ready(function () {
         var url = $("#inputValue").val();
         url = url.replace(/。+/g, ".").replace(/\.+/g, ".");
         if(search == 2){
-            $("#inputValue").val(userziurl);
+            if(userziurl == undefined || userziurl == ""){
+                $("#inputValue").val(url);
+            }else{
+                $("#inputValue").val(userziurl);
+            }
         }else{
             $("#inputValue").val(url);
         }

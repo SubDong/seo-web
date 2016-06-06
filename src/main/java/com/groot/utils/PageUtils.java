@@ -1,5 +1,8 @@
 package com.groot.utils;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.groot.webmagic.seo.score.vo.ScoreItem;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -126,12 +130,27 @@ public class PageUtils {
      */
     public static String getPhantomJsStr(String url) {
         String returnStr = null;
+        if(!url.contains("http://")){
+            url = "http://" + url;
+        }
 
-        AjaxPhantomjs ajaxPhantomjs = new AjaxPhantomjs();
+        WebClient webClient = new WebClient();        //htmlunit 对css和javascript的支持不好，所以请关闭之
+        webClient.getOptions().setJavaScriptEnabled(false);
+        webClient.getOptions().setCssEnabled(false);
+
         try {
-            returnStr = ajaxPhantomjs.getPage(url);
+
+            HtmlPage page = webClient.getPage(url);
+            returnStr = page.asXml();
+            System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (FailingHttpStatusCodeException ignored){
+            if(ignored.getStatusCode() == 404){
+                return "";
+            } else{
+                return "";
+            }
         }
         return returnStr;
     }

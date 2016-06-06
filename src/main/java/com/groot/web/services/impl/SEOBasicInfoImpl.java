@@ -39,7 +39,7 @@ public class SEOBasicInfoImpl implements SEOBasicInfoService {
             return null;
         }
 
-        String inquiryUrl = "http://www.aizhan.com/siteall/" + urlString + "/";
+        String inquiryUrl = "http://www.aizhan.com/cha/" + urlString + "/";
 
         String s = PageUtils.getPhantomJsStr(inquiryUrl);
 
@@ -50,14 +50,17 @@ public class SEOBasicInfoImpl implements SEOBasicInfoService {
             if (body != null && !body.equals("") && !body.equals("HTTP request failed!") && body.indexOf("404 Not Found") < 0) {
                 //title 信息
                 String title = doc.getElementById("main_title").html();
+
+                String ageUrl = "http://whois.chinaz.com/" + urlString;
+
                 //域名年龄
-                String dateTime = doc.getElementById("domain_date").html();
+                String dateTime = doc.getElementById("domain_date").html() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果年龄显示有问题请点击此处查看&nbsp;&nbsp;&nbsp; <a href=" + ageUrl + ">查看</a>";
 
                 Element baidu_date = doc.getElementById("baidu_date");
                 String KZ;
-                if(baidu_date == null){
+                if (baidu_date == null) {
                     KZ = "百度已取消快照时间";
-                }else{
+                } else {
                     if ("0000-00-00".equals(baidu_date.html())) {
                         KZ = baidu_date.html("-").toString().replaceAll("style=\"color:#333333\"", "");
                     } else {
@@ -101,8 +104,8 @@ public class SEOBasicInfoImpl implements SEOBasicInfoService {
                 stringMap.put("worldalexa", alexa);
                 stringMap.put("baiduLU", baiduYL_LU);
                 stringMap.put("seo_link", seo_link);
-                stringMap.put("googlePR",googlePR);
-                stringMap.put("baiduBR",baiduBR);
+                stringMap.put("googlePR", googlePR);
+                stringMap.put("baiduBR", baiduBR);
                 maps.add(stringMap);
                 return maps;
             }

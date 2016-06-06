@@ -109,8 +109,11 @@ public class DomainScoreItemsImpl implements DomainScoreItemsService {
         ScoreItem scoreItem = new ScoreItem("网站域名中包含目标关键字", ScoreDomainConstant.NAME_SEO2_4);
         int siteIncludeCount = 0;//记录包含目标关键字次数
         double source = 0.0;
+        if (!url.contains("http://")) {
+            url = "http://" + url;
+        }
         String html = PageUtils.getPhantomJsStr(url);
-        if (!html.equals("HTTP request failed!")) {
+        if (!html.equals("HTTP request failed!") && html != null) {
             Document doc = Jsoup.parse(html);
             Set<String> targetKeywordCH = PageUtils.getTargetKeywords(doc);//获取中文的目标关键字
             Set<String> targetKeywordPY = KeywordUtils.getPinyinTKD(targetKeywordCH);//转换为拼音的目标关键字
@@ -484,13 +487,13 @@ public class DomainScoreItemsImpl implements DomainScoreItemsService {
                     if (div != null) {
                         String divStr = div.text();
                         double betweenDays = 0;
-                        String dateStr=null;
-                        if(divStr.contains("创建时间")&&divStr.contains("过期时间")){
-                            dateStr= divStr.substring(divStr.indexOf("创建时间"), divStr.indexOf("过期时间")).split(":")[1].trim();
-                        }else if(divStr.contains("创建时间")&&!divStr.contains("过期时间")){
+                        String dateStr = null;
+                        if (divStr.contains("创建时间") && divStr.contains("过期时间")) {
+                            dateStr = divStr.substring(divStr.indexOf("创建时间"), divStr.indexOf("过期时间")).split(":")[1].trim();
+                        } else if (divStr.contains("创建时间") && !divStr.contains("过期时间")) {
                             dateStr = divStr.substring(divStr.indexOf("创建时间")).split(":")[1].trim();
                         }
-                        if(dateStr!=null){
+                        if (dateStr != null) {
                             Pattern pattern = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}");
                             Matcher matcher = pattern.matcher(dateStr);
                             SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -572,7 +575,7 @@ public class DomainScoreItemsImpl implements DomainScoreItemsService {
         //3.2 网站的外部链接流行度、广泛度
         scoreItems.add(scorePopulationOfExtLinks(url));
         //3.5 网站新外部链接产生的速率
-        scoreItems.add(scoreExtLinksFrequency(url));
+//        scoreItems.add(scoreExtLinksFrequency(url));
         //3.6 外部链接的链接的年龄
         scoreItems.add(scoreAgeofExtLinks(url));
 

@@ -47,7 +47,7 @@
         <div class="ui action left icon input">
             <div class="ui action left icon input">
             <i id="searchLoding" class="search icon"></i>
-            <input type="text" id="inputValue" name="url" value=""  placeholder="请输入您要查询的网站" />
+            <input type="text" id="inputValue" name="url" value="${reutrnUrl}"  placeholder="请输入您要查询的网站" />
             <input type="text" id="useName" style="display: none">
             <div class="ui teal floating dropdown icon button" id="dropdown">
                 <div class="text" id="menu_text">网站查询</div> <i class="dropdown icon"></i>
