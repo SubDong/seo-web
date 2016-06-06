@@ -1,0 +1,122 @@
+.container{
+    padding:10px;
+    margin:0 auto;
+}
+
+.menu img{
+ vertical-align: middle;
+}
+.menu a{
+    margin-left:10px;
+}
+.index_search{
+    width:400px;
+}
+.home_input{
+/* margin-top:15%;*/
+}
+.home_input .action{
+    width:40%;
+    min-width:400px;
+    margin:0 auto;
+}
+.home_input .action .action{
+    width:100%;
+}
+.top{
+    #background:#3b83c0;
+}
+.top .item{
+     color:#fff\9;
+     font-size:16px\9;
+    #padding:10px;
+}
+.menu.inverted.ui .item.active{
+    color: #3b83c0 \9 !important;
+    background-color:#ffffff\9;/*:rgba(0,0,0,0.3);*/
+    opacity:0.57\9;filter:alpha(opacity=80)\9;
+}
+INPUT{
+    border:1px solid #ccc\9 ;
+}
+.input.action.ui > .button{
+    #float:left;
+    #margin-top:10px;
+}
+.ui.action.input > .button, .ui.action.input > .buttons{
+    text-align: center;
+}
+.my_input .ui.button{
+    width:100px;
+}
+.ui.celled.table tr td:first-child, .ui.celled.table tr th:first-child{
+   border-left: 1px solid #d4d4d5
+}
+#menu .item{
+    color:#424242\9;
+    height:30px\9;
+  /*  line-height:30px\9;*/
+    text-align: center\9;
+    vertical-align: middle;
+
+}
+#menu .item:hover{
+    color:#000\9;
+    background:#ccc\9;
+
+}
+.container table tr td img{
+    vertical-align: middle;
+}
+#msg{
+    line-height:30px;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+.header .content .label{
+    cursor: pointer;
+}
+#top-menu{
+    border-radius: 0px;
+
+}
+#top-menu .user_img img{
+    padding:0px;
+}
+/*#top-menu .menu{
+    height:100%;
+}*/
+#top-menu .logo{
+    padding:10px 0;
+
+}
+.menu_right{
+    float:right;
+}
+.dropdown.ui .menu > .item{
+    padding:0px;
+}
+/***分页*******/
+.pagination{
+    vertical-align: middle;
+    text-align: center;
+}
+.pagination span,.pagination a{
+    display:inline-block;
+    padding:0 8px;
+    background:#eee;
+    margin-right:5px;
+    height:30px;
+    line-height:30px;
+    vertical-align: middle;
+    color:#000;
+}
+.pagination .current{
+    background:#00b5ad;
+    color:#fff;
+}
+.pagination .current.prev,.pagination .current.next{
+    background:#eee;
+    color:#000;
+}

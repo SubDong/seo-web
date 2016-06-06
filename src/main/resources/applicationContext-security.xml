@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- intercept-url:拦截器,可以设定哪些路径需要哪些权限来访问. filters=none 不使用过滤,也可以理解为忽略 -->
+    <security:http auto-config="true" use-expressions="true" >
+        <security:intercept-url pattern="/seo/index" access="permitAll"/>
+        <security:intercept-url pattern="/seo/score" access="permitAll"/>
+        <security:intercept-url pattern="/seo/*" access="hasRole('ROLE_ADMIN')"/>
+        <security:form-login
+                login-page="http://sem.best-ad.cn/login"
+                authentication-failure-url="http://sem.best-ad.cn/login?error=true"
+                default-target-url="/seo/index"/><!--登录成功后跳转页面-->
+        <security:logout
+                logout-url="/auth/logout"
+                logout-success-url="http://sem.best-ad.cn/login"/><!--注销url以及退出登录跳转到的页面-->
+    </security:http>
+
+    <!-- 权限管理操作 -->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customDetailsService">
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+
+    <bean id="customDetailsService" class="com.groot.web.commons.CustomDetailsService"/>
+
+</beans>

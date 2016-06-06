@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+    <mongo:mongo id="mongo" replica-set="${mongo.host}">
+        <mongo:options connections-per-host="20"
+                       threads-allowed-to-block-for-connection-multiplier="5"
+                       auto-connect-retry="true"
+                       slave-ok="true"/>
+    </mongo:mongo>
+
+    <mongo:db-factory id="mongoDbFactory" dbname="seo" mongo-ref="mongo"/>
+    <mongo:mapping-converter id="mongoConverter"/>
+
+    <bean id="noClassMongoConverter" class="com.groot.mongodb.base.MongoConverterEnhanceFactoryBean">
+        <property name="mongoConverter" ref="mongoConverter"/>
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+        <constructor-arg name="mongoConverter" ref="noClassMongoConverter"/>
+    </bean>
+
+    <bean id="mongoSysTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+        <constructor-arg name="mongoConverter" ref="noClassMongoConverter"/>
+    </bean>
+
+</beans>
