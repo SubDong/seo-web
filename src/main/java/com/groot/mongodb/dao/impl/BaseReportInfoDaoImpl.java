@@ -86,13 +86,10 @@ public class BaseReportInfoDaoImpl implements BaseReportInfoDao {
 
         ReportInfoEntity reportInfoEntity = mongoTemplate.findOne(Query.query(Criteria.where("uuid").is(uid)), ReportInfoEntity.class, MongoEntityConstants.TBL_CRAWLING);
 
-        ReportInfoDTO reportInfoDTO = ObjectUtils.convert(reportInfoEntity,ReportInfoDTO.class);
-
-        return reportInfoDTO;
+        return ObjectUtils.convert(reportInfoEntity,ReportInfoDTO.class);
     }
 
     private MongoTemplate getMongoTempate(String userName){
-        MongoTemplate mongoTemplate = BaseMongoTemplate.getMongoTemplate(DBNameUtils.getDatabaseName(userName));
-        return mongoTemplate;
+        return BaseMongoTemplate.getMongoTemplate(DBNameUtils.getDatabaseName(userName));
     }
 }

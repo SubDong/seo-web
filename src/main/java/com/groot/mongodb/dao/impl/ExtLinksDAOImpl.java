@@ -20,7 +20,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.matc
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 @Repository("extLinksDAO")
 public class ExtLinksDAOImpl extends BaseRepository<ExtLinksDTO, String> implements ExtLinksDAO {

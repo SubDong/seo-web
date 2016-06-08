@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 public abstract class BaseRepository<T extends BaseDTO, ID extends Serializable> implements BaseInterface<T, ID> {
 

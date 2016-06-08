@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 public class ObjectUtils {
     public static <T> List<T> convert(List<?> srcList, Class<T> targetClz) {

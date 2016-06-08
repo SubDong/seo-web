@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by XiaoWei on 2015/2/13.
+ * Created by subDong on 2015/2/13.
  */
 @Repository("SystemDAO")
 public class SystemDAOImpl extends BaseRepository<SystemUserDTO,Long> implements SystemDAO {

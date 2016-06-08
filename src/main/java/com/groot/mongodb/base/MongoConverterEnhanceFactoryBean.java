@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.convert.MongoTypeMapper;
 
 /**
- * Created by XiaoWei on 2015/1/7.
+ * Created by subDong on 2015/1/7.
  */
 public class MongoConverterEnhanceFactoryBean implements FactoryBean<MappingMongoConverter> {
 

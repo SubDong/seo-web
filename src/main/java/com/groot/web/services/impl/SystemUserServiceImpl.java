@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * Created by XiaoWei on 2015/2/13.
+ * Created by subDong on 2015/2/13.
  */
 @Service("systemUserService")
 public class SystemUserServiceImpl implements SystemUserService {

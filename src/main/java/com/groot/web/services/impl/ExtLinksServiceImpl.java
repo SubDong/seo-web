@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 @Service
 public class ExtLinksServiceImpl implements ExtLinksService {

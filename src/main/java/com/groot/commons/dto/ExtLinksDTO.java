@@ -3,7 +3,7 @@ package com.groot.commons.dto;
 import java.util.Date;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 public class ExtLinksDTO extends BaseDTO {
     private String url;

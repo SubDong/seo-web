@@ -3,7 +3,7 @@ package com.groot.mongodb.entity;
 import org.springframework.data.annotation.Id;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 public class BaseEntity {
     @Id

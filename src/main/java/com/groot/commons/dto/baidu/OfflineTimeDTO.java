@@ -3,7 +3,7 @@ package com.groot.commons.dto.baidu;
 import java.util.Date;
 
 /**
- * Created by XiaoWei on 2015/2/13.
+ * Created by subDong on 2015/2/13.
  */
 public class OfflineTimeDTO {
     //OfflineTimeType Attributes

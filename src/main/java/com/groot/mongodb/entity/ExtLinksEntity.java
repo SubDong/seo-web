@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 
 /**
- * Created by XiaoWei on 2015/1/8.
+ * Created by subDong on 2015/1/8.
  */
 @Document(collection = MongoEntityConstants.TBL_EXTLINKS)
 public class ExtLinksEntity extends BaseEntity{

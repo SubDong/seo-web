@@ -18,39 +18,41 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Created by XiaoWei on 2015/1/7.
+ * Created by subdong on 2015/1/7.
  */
 public class BaseMongoTemplate {
-    private static String DATABASE="seo";
-    private static String SYS_DATABASE="sys";
-    private static Mongo  mongo;
-    static{
-        if(mongo==null){
-            InputStream ins=BaseMongoTemplate.class.getResourceAsStream("/mongodb.properties");
+    private static String DATABASE = "seo";
+    private static String SYS_DATABASE = "sys";
+    private static Mongo mongo;
+
+    static {
+        if (mongo == null) {
+            InputStream ins = BaseMongoTemplate.class.getResourceAsStream("/mongodb.properties");
             Properties p = new Properties();
             try {
                 p.load(ins);
-                String hosts=p.getProperty("mongo.host");
-                if(!hosts.equals("")&&hosts!=null){
-                    String[] hostArray=hosts.split(",");
-                    List<ServerAddress> serverAddresses=new ArrayList<>();
-                    for (String host:hostArray){
-                        String[] hostPort=host.split(":");
-                        ServerAddress address=null;
-                        if(hostPort.length==1){
-                            address=new ServerAddress(hostPort[0]);
-                        }else{
-                            address=new ServerAddress(hostPort[0], Integer.parseInt(hostPort[1]));
+                String hosts = p.getProperty("mongo.host");
+                if (hosts != null && !hosts.equals("")) {
+                    String[] hostArray = hosts.split(",");
+                    List<ServerAddress> serverAddresses = new ArrayList<>();
+                    for (String host : hostArray) {
+                        String[] hostPort = host.split(":");
+                        ServerAddress address = null;
+                        if (hostPort.length == 1) {
+                            address = new ServerAddress(hostPort[0]);
+                        } else {
+                            address = new ServerAddress(hostPort[0], Integer.parseInt(hostPort[1]));
                         }
                         serverAddresses.add(address);
                     }
-                    mongo=new MongoClient(serverAddresses);
+                    mongo = new MongoClient(serverAddresses);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     private BaseMongoTemplate() {
     }
 
@@ -76,6 +78,8 @@ public class BaseMongoTemplate {
         return BaseMongoTemplate.getMongoTemplate(DATABASE);
     }
 
-    public static MongoTemplate getSysMong(){return BaseMongoTemplate.getMongoTemplate(SYS_DATABASE);}
+    public static MongoTemplate getSysMong() {
+        return BaseMongoTemplate.getMongoTemplate(SYS_DATABASE);
+    }
 
 }

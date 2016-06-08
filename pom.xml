@@ -22,14 +22,14 @@
                 <redis.port>16379</redis.port>
                 <redis.password>subdong</redis.password>
 
-                <phantomjs.path>/home/Rainbow/rainbow-subdong/phantomjs-1.9.8/bin</phantomjs.path>
+                <!--<phantomjs.path>/home/Rainbow/rainbow-subdong/phantomjs-1.9.8/bin</phantomjs.path>-->
 
                 <mongo.host>127.0.0.1:27017</mongo.host>
                 <mongo.username></mongo.username>
                 <mongo.password></mongo.password>
 
-                <hadoop.namenode>192.168.1.150</hadoop.namenode>
-                <hadoop.port>9000</hadoop.port>
+                <!--<hadoop.namenode>192.168.1.150</hadoop.namenode>
+                <hadoop.port>9000</hadoop.port>-->
             </properties>
         </profile>
         <profile>

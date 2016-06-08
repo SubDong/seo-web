@@ -6,7 +6,7 @@ import com.groot.commons.dto.baidu.OptTypeDTO;
 import java.util.List;
 
 /**
- * Created by XiaoWei on 2015/2/13.
+ * Created by subDong on 2015/2/13.
  */
 public class BaiduAccountInfoDTO {
     private Long id;

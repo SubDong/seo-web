@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by XiaoWei on 2015/1/7.
+ * Created by subDong on 2015/1/7.
  */
 @Controller
 @RequestMapping("auth")

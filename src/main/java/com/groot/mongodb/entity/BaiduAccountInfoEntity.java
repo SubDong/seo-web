@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.List;
 
 /**
- * Created by XiaoWei on 2015/2/13.
+ * Created by subDong on 2015/2/13.
  */
 public class BaiduAccountInfoEntity {
     private Long id;

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by XiaoWei on 2015/2/11.
+ * Created by subDong on 2015/2/11.
  */
 public class CustomDetailsService implements UserDetailsService {
     public static String userName;

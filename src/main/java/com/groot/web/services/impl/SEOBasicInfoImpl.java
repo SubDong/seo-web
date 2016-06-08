@@ -47,7 +47,7 @@ public class SEOBasicInfoImpl implements SEOBasicInfoService {
 
         if (doc != null) {
             String body = doc.getElementsByTag("body").html();
-            if (body != null && !body.equals("") && !body.equals("HTTP request failed!") && body.indexOf("404 Not Found") < 0) {
+            if (body != null && !body.equals("") && !body.equals("HTTP request failed!") && !body.contains("404 Not Found")) {
                 //title 信息
                 String title = doc.getElementById("main_title").html();
 
@@ -284,9 +284,7 @@ public class SEOBasicInfoImpl implements SEOBasicInfoService {
                             elements = element.getElementsByTag("em");
                         }
                     } else {
-                        if (element != null) {
-                            elements.add(element);
-                        }
+                        elements.add(element);
                     }
                     Element smart = docback.getElementById("smart_hint_container");
                     if (smart == null) {
